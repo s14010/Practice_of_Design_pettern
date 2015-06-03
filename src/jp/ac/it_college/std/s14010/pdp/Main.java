@@ -1,22 +1,48 @@
 package jp.ac.it_college.std.s14010.pdp;
 
+import jp.ac.it_college.std.s14010.pdp.prototype.MessageBox;
+import jp.ac.it_college.std.s14010.pdp.prototype.UnderlinePen;
+import jp.ac.it_college.std.s14010.pdp.prototype.framework.Manager;
+import jp.ac.it_college.std.s14010.pdp.singleton.Singleton;
 import jp.ac.it_college.std.s14010.pdp.adapter.Print;
 import jp.ac.it_college.std.s14010.pdp.adapter.Print2;
 import jp.ac.it_college.std.s14010.pdp.adapter.PrintBanner;
 import jp.ac.it_college.std.s14010.pdp.adapter.PrintBanner2;
+import jp.ac.it_college.std.s14010.pdp.factory.framework.Factory;
+import jp.ac.it_college.std.s14010.pdp.factory.framework.Product;
+import jp.ac.it_college.std.s14010.pdp.factory.idcard.IDCard;
+import jp.ac.it_college.std.s14010.pdp.factory.idcard.IDCardFactory;
 import jp.ac.it_college.std.s14010.pdp.iterator.Book;
 import jp.ac.it_college.std.s14010.pdp.iterator.BookShelf;
 import jp.ac.it_college.std.s14010.pdp.iterator.Iterator;
+import jp.ac.it_college.std.s14010.pdp.template.AbstractDisplay;
+import jp.ac.it_college.std.s14010.pdp.template.CharDisplay;
+import jp.ac.it_college.std.s14010.pdp.template.StringDisplay;
 
+import javax.swing.*;
 import java.util.*;
 
 public class Main {
 
     public static void main(String[] args) {
-        hashMapTest();
+        prototypeMain();
     }
 
     public static void iteratorMain() {
+        BookShelf bookShelf = new BookShelf(4);
+        bookShelf.appendBook(new Book("Around the World in 80 days"));
+        bookShelf.appendBook(new Book("Bible"));
+        bookShelf.appendBook(new Book("Cinderella"));
+        bookShelf.appendBook(new Book("Daddy-Long-Legs"));
+        Iterator it = bookShelf.iterator();
+
+        while (it.hasNext()) {
+            Book book = (Book) it.next();
+            System.out.println(book.getName());
+        }
+    }
+
+    public static void practice1_1() {
         BookShelf bookShelf = new BookShelf(4);
         bookShelf.appendBook(new Book("Around the World in 80 days"));
         bookShelf.appendBook(new Book("Bible"));
@@ -263,6 +289,57 @@ public class Main {
         System.out.println("Bobの値 = " + map.get("Bob"));
 
         System.out.println("Fredの値 = " + map.get("Fred"));
+
+    }
+
+    public static void templateMain() {
+        AbstractDisplay d1 = new CharDisplay('H');
+        AbstractDisplay d2 = new StringDisplay("Hello, world.");
+        AbstractDisplay d3 = new StringDisplay("こんにちは。");
+
+        d1.display();
+        d2.display();
+        d3.display();
+    }
+
+    public static void factoryMain() {
+        Factory factory = new IDCardFactory();
+        Product card1 = factory.create("結城浩");
+        Product card2 = factory.create("とむら");
+        Product card3 = factory.create("佐藤花子");
+
+        card1.use();
+        card2.use();
+        card3.use();
+    }
+
+    public static void singletonMain() {
+        System.out.println("Start");
+        Singleton obj1 = Singleton.getInstance();
+        Singleton obj2 = Singleton.getInstance();
+        if (obj1 == obj2) {
+            System.out.println("obj1とobj2は同じインスタンスです。");
+        } else {
+            System.out.println("obj1とobj2は同じインスタンスではありません。");
+        }
+        System.out.println("End");
+    }
+
+    public static void prototypeMain() {
+        Manager manager= new Manager();
+        UnderlinePen upen = new UnderlinePen('~');
+        MessageBox mbox = new MessageBox('*');
+        MessageBox sbox = new MessageBox('/');
+        manager.register("strong message", upen);
+        manager.register("warning box", mbox);
+        manager.register("slash box", sbox);
+
+        jp.ac.it_college.std.s14010.pdp.prototype.framework.Product p1 = manager.create("strong message");
+        p1.use("Hello, world.");
+        jp.ac.it_college.std.s14010.pdp.prototype.framework.Product p2 = manager.create("warning box");
+        p2.use("Hello, world");
+        jp.ac.it_college.std.s14010.pdp.prototype.framework.Product p3 = manager.create("slash box");
+        p3.use("Hello, world");
 
     }
 
