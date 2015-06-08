@@ -1,5 +1,8 @@
 package jp.ac.it_college.std.s14010.pdp;
 
+import jp.ac.it_college.std.s14010.pdp.builder.Director;
+import jp.ac.it_college.std.s14010.pdp.builder.HTMLBuilder;
+import jp.ac.it_college.std.s14010.pdp.builder.TextBuilder;
 import jp.ac.it_college.std.s14010.pdp.prototype.MessageBox;
 import jp.ac.it_college.std.s14010.pdp.prototype.UnderlinePen;
 import jp.ac.it_college.std.s14010.pdp.prototype.framework.Manager;
@@ -10,7 +13,6 @@ import jp.ac.it_college.std.s14010.pdp.adapter.PrintBanner;
 import jp.ac.it_college.std.s14010.pdp.adapter.PrintBanner2;
 import jp.ac.it_college.std.s14010.pdp.factory.framework.Factory;
 import jp.ac.it_college.std.s14010.pdp.factory.framework.Product;
-import jp.ac.it_college.std.s14010.pdp.factory.idcard.IDCard;
 import jp.ac.it_college.std.s14010.pdp.factory.idcard.IDCardFactory;
 import jp.ac.it_college.std.s14010.pdp.iterator.Book;
 import jp.ac.it_college.std.s14010.pdp.iterator.BookShelf;
@@ -19,13 +21,12 @@ import jp.ac.it_college.std.s14010.pdp.template.AbstractDisplay;
 import jp.ac.it_college.std.s14010.pdp.template.CharDisplay;
 import jp.ac.it_college.std.s14010.pdp.template.StringDisplay;
 
-import javax.swing.*;
 import java.util.*;
 
 public class Main {
 
     public static void main(String[] args) {
-        prototypeMain();
+        builderMain(new String[] {"html"});
     }
 
     public static void iteratorMain() {
@@ -341,6 +342,34 @@ public class Main {
         jp.ac.it_college.std.s14010.pdp.prototype.framework.Product p3 = manager.create("slash box");
         p3.use("Hello, world");
 
+    }
+
+    public static void builderMain(String[] args) {
+        if (args.length != 1) {
+            builderUsage();
+            System.exit(0);
+        }
+        if (args[0].equals("plain")) {
+            TextBuilder textbuilder = new TextBuilder();
+            Director director = new Director(textbuilder);
+            director.construct();
+            String result = textbuilder.getResult();
+            System.out.println(result);
+        } else if (args[0].equals("html")) {
+            HTMLBuilder htmlbuilder = new HTMLBuilder();
+            Director director = new Director(htmlbuilder);
+            director.construct();
+            String filename = htmlbuilder.getResult();
+            System.out.println(filename +"が作成されました。");
+        } else {
+            builderUsage();
+            System.exit(0);
+        }
+    }
+
+    public static void builderUsage(){
+        System.out.println("Usage: java Main plain   プレーンテキストで文章作成");
+        System.out.println("UsageP java Main html    HTMLファイルで文章作成");
     }
 
     public void dummy() {
