@@ -9,6 +9,9 @@ import jp.ac.it_college.std.s14010.pdp.bridge.StringDisplayImpl;
 import jp.ac.it_college.std.s14010.pdp.builder.Director;
 import jp.ac.it_college.std.s14010.pdp.builder.HTMLBuilder;
 import jp.ac.it_college.std.s14010.pdp.builder.TextBuilder;
+import jp.ac.it_college.std.s14010.pdp.composite.Directory;
+import jp.ac.it_college.std.s14010.pdp.composite.File;
+import jp.ac.it_college.std.s14010.pdp.composite.FileTreatmentException;
 import jp.ac.it_college.std.s14010.pdp.prototype.MessageBox;
 import jp.ac.it_college.std.s14010.pdp.prototype.UnderlinePen;
 import jp.ac.it_college.std.s14010.pdp.prototype.framework.Manager;
@@ -36,7 +39,7 @@ import java.util.*;
 public class Main {
 
     public static void main(String[] args) {
-     // strategyMain();
+        compositeMain();
     }
 
     public static void iteratorMain() {
@@ -459,6 +462,39 @@ public class Main {
         System.out.println(player1.toString());
         System.out.println(player2.toString());
 
+    }
+
+    public static void compositeMain() {
+        try{
+            System.out.println("Making root entries...");
+            Directory rootdir = new Directory("root");
+            Directory bindir = new Directory("bin");
+            Directory tmpdir = new Directory("tmp");
+            Directory usrdir = new Directory("usr");
+            rootdir.add(bindir);
+            rootdir.add(tmpdir);
+            rootdir.add(usrdir);
+            bindir.add(new File("vi", 10000));
+            bindir.add(new File("latex", 20000));
+            rootdir.printLine();
+
+            System.out.println("");
+            System.out.println("Making user entries...");
+            Directory yuki = new Directory("yuki");
+            Directory hanako = new Directory("hanako");
+            Directory tomura = new Directory("tomura");
+            usrdir.add(yuki);
+            usrdir.add(hanako);
+            usrdir.add(tomura);
+            yuki.add(new File("diary.html", 100));
+            yuki.add(new File("Composite.java", 200));
+            hanako.add(new File("memo.tex", 300));
+            tomura.add(new File("game.doc", 400));
+            tomura.add(new File("junk.mail", 500));
+            rootdir.printLine();
+        } catch (FileTreatmentException e) {
+            e.printStackTrace();
+        }
     }
 
     public void dummy() {
