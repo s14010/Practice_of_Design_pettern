@@ -15,6 +15,7 @@
       <module fileurl="file://$PROJECT_DIR$/singleton/singleton.iml" filepath="$PROJECT_DIR$/singleton/singleton.iml" />
       <module fileurl="file://$PROJECT_DIR$/stratege/stratege.iml" filepath="$PROJECT_DIR$/stratege/stratege.iml" />
       <module fileurl="file://$PROJECT_DIR$/template/template.iml" filepath="$PROJECT_DIR$/template/template.iml" />
+      <module fileurl="file://$PROJECT_DIR$/visitor/visitor.iml" filepath="$PROJECT_DIR$/visitor/visitor.iml" />
     </modules>
   </component>
 </project>
