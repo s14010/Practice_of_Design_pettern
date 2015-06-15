@@ -39,7 +39,7 @@ import java.util.*;
 public class Main {
 
     public static void main(String[] args) {
-        jp.ac.it_college.std.s14010.pdp.visitor.Main.main(args);
+        jp.ac.it_college.std.s14010.pdp.observer.Main.main(args);
     }
 
     public static void iteratorMain() {
