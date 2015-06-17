@@ -7,5 +7,28 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="interpreter" />
+    <orderEntry type="module" module-name="adapter" />
+    <orderEntry type="module" module-name="bridge" />
+    <orderEntry type="module" module-name="builder" />
+    <orderEntry type="module" module-name="command" />
+    <orderEntry type="module" module-name="composite" />
+    <orderEntry type="module" module-name="decorator" />
+    <orderEntry type="module" module-name="facade" />
+    <orderEntry type="module" module-name="factory" />
+    <orderEntry type="module" module-name="flyweight" />
+    <orderEntry type="module" module-name="iterator" />
+    <orderEntry type="module" module-name="mediator" />
+    <orderEntry type="module" module-name="memonto" />
+    <orderEntry type="module" module-name="observer" />
+    <orderEntry type="module" module-name="Practice of Design pettern" />
+    <orderEntry type="module" module-name="prototype" />
+    <orderEntry type="module" module-name="proxy" />
+    <orderEntry type="module" module-name="responsibility" />
+    <orderEntry type="module" module-name="singleton" />
+    <orderEntry type="module" module-name="state" />
+    <orderEntry type="module" module-name="stratege" />
+    <orderEntry type="module" module-name="template" />
+    <orderEntry type="module" module-name="visitor" />
   </component>
 </module>
